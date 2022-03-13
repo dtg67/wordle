@@ -95,15 +95,17 @@ wordle_find <- function(letter_mat, color_codes, guess){
   ylw_ltr <- guess[ylw_idx]
   blk_ltr <- guess[blk_idx]
   grn_bool <- grn_ltr %in% letter_mat[grn_idx]
+  ylw_bool <- ylw_ltr %in% letter_mat[!(c(1:5) %in% grn_idx) & !(c(1:5) %in% ylw_idx)]
   if(any(ylw_ltr %in% blk_ltr)){
     mgk_ltr <- ylw_ltr[ylw_ltr %in% blk_ltr]
     mgk_idx <- which(guess == mgk_ltr & color_codes == "Y")
     # mgk_bool <- mgk_bool
     return(as.logical(prod(c(grn_bool, ylw_bool, mgk_idx))))
   }
-  ylw_bool <- ylw_ltr %in% letter_mat[!(c(1:5) %in% grn_idx) & !(c(1:5) %in% ylw_idx)]
-  blk_bool <- !(blk_ltr %in% letter_mat[!(1:5) %in% grn_idx])
   
+  
+  blk_bool <- !(blk_ltr %in% letter_mat[!(1:5) %in% grn_idx])
+  browser()
   return(as.logical(prod(c(grn_bool, ylw_bool, blk_bool))))
 }
 

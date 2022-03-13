@@ -4,7 +4,7 @@ library(ggplot2)
 library(ggthemes)
 library(tidyr)
 library(stringr)
-source("~/Desktop/wordle_func.R")
+source("wordle_func.R")
 
 url <- "https://www.nytimes.com/games/wordle/main.18637ca1.js"
 wordle_content <- fetch_content(url)
@@ -31,19 +31,9 @@ knuth_letters <- entropy_word(knuth_letters, knuth_prob)
 
 knuth_letters <- knuth_letters[order(knuth_letters$Entropy, decreasing = TRUE), ]
 print(knuth_letters[1:10, ])
-green.global <- setNames(data.frame(matrix(nrow = 1, ncol = 5)), c("Pos_1", "Pos_2", "Pos_3", "Pos_4", "Pos_5"))
 
-word <- c("S", "O", "R", "E", "S")
-color_codes <- c("B", "G", "B", "B", "B")
+guess <- c("T", "A", "B", "O", "O")
+color_codes <-c("G", "G", "B", "B", "B")
 
-green.res <- green_letters(word, color_codes, knuth_letters, green.global)
-yellow.res <- yellow_letters(word, color_codes, green.res[[1]], green.res[[2]])
-black.res <- black_letters(word, color_codes, yellow.res, green.res[[2]])
-head(black.res)
-
-next.res <- letters_to_factors(black.res)
-next.prob <- plot_hists(next.res, "NEXT")
-black.res <- entropy_word(black.res, next.prob)
-black.res <- black.res[order(black.res$Entropy, decreasing = TRUE), ]
-
-head(black.res)
+knuth_letters[apply(knuth_letters[,1:5], 1, wordle_find, guess = guess, 
+                    color_codes = color_codes),]

@@ -99,7 +99,6 @@ wordle_find <- function(letter_mat, color_codes, guess){
   if(any(ylw_ltr %in% blk_ltr)){
     mgk_ltr <- ylw_ltr[ylw_ltr %in% blk_ltr]
     mgk_idx <- which(guess == mgk_ltr & color_codes == "Y")
-    # mgk_bool <- mgk_bool
     return(as.logical(prod(c(grn_bool, ylw_bool, mgk_idx))))
   }
   

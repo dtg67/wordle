@@ -33,7 +33,13 @@ knuth_letters <- knuth_letters[order(knuth_letters$Entropy, decreasing = TRUE), 
 print(knuth_letters[1:10, ])
 
 guess <- c("T", "A", "B", "O", "O")
+<<<<<<< HEAD
+color_codes <-c("G", "G", "B", "Y", "B")
+
+T_A <- knuth_letters[apply(knuth_letters[,1:5], 1, wordle_find, guess = guess, 
+=======
 color_codes <-c("G", "G", "B", "B", "B")
 
 knuth_letters[apply(knuth_letters[,1:5], 1, wordle_find, guess = guess, 
+>>>>>>> main
                     color_codes = color_codes),]

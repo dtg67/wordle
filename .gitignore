@@ -37,10 +37,6 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
-<<<<<<< HEAD
 *.pdf
-Wordle.log
-=======
 *.log
-*.pdf
->>>>>>> main
+

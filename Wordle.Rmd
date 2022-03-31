@@ -2,7 +2,9 @@
 title: 'Solving Wordle: a maximum entropy approach'
 author: "Diego Gomez"
 date: \today
-output: pdf_document
+output: 
+  pdf_document:
+    number_sections: true
 bibliography: references.bib
 csl: ieee.csl
 header-includes:
@@ -14,14 +16,18 @@ header-includes:
 
 *** Here would go the abstract, if I had one! ***
 
-## Introduction
+# Introduction
 
 The online word-game Wordle has exploded in popularity. Its simplistic rules, variety of strategies and aesthetic presentation has allowed the game to grow from its humble beginnings as a word-game gifted to a spouse, to a national phenomena. While many in the player base claim to have an effective strategy for solving Wordle, few stratagems have been grounded in mathematical rigor. The most complete and fundamental strategy was first presented by 3BlueAnd1Brown utilizing maximum entropy @solvingwordle. This elegant strategy has produced outstanding results in its ability to quickly converge(but this isn't convergence) on the correct solution. This project is an attempt to produce the strategy of maximum entropy using RStudio and is not intended to improve, or supply, more mathematical rigor.
 
-## Wordle the game
+# Wordle
+## The game
 Wordle's popularity may be, in part, to its simple rules. The player is given six tries to guess the wordle, an unknown, common usage five-letter-word in American English (if you think this clarification is unimportant ask the people across the pond about how they felt guessing color or humor). After a player guesses a word, the letters will stylistically be colored either green, yellow or black. A green letter means the letter is in the wordle and in the correct position within the wordle A yellow letter means the letter is in the wordle and the *not* in the correct position. A black letter simply means that the letter is not in the wordle at all. It is important to note however, that a letter may be colored both yellow and black. This special case only arises when the guess word has two or more of that letter, and the wordle only contains that letter once. These unambiguous, rigid rules make Wordle a game possible to be solved quickly through simple(?) well established techniques.
 
-## Information theory
+## Basic strategy
+Most successful Wordle players use a similar strategy in trying to find an initial word that will provide the user with a guess that will highlight a number letters as green or yellow. An example of a word commonly used as an initial guess is POISE, the general consensus being that this word provides a lot of information about the wordle because POISE uses three of five unique vowels that are present in all five letter words. As the player continues to guess words the set of possible words for the wordle decreases. A winning and successful strategy would have a quantitative way to greatly reduce the possible set of words after every guess.
+
+# Information theory
 Solving Wordle can be done through the important and well established field of Information theory. The theory's father, Claude Shannon, may be the smartest and, to the uninitiated, the least well known scientist of the $20^{\mathrm{th}}$ century. Few, if any, fields have been established and solved so quickly and completely by one man. Claude Shannon's masterpiece came at his time at AT&T Bell Labs, a company highly invested in making sure of the fidelity and certainty of communication of information. Much like Wordle, communication is full of uncertainty. Information theory deals with uncertainty by gathering and using information to adjust the probability of states as more information is provide. Wordle's rules provide simple and clear information through each step of the game and the player takes that information to reduce the ensemble of possible words. For the strategy of maximum entropy, every word in the ensemble must be assigned a qualitative ranking of its information. This ranking can simply be its entropy: 
 
 \begin{equation}
